@@ -1,0 +1,9 @@
+1. GitHub에서 repository 작성
+2. Window CMD 에서 ' npx create-react-app "Project 이름" ' 
+3. App.js / Index.js 제외 전부 삭제 및 연결 확인
+4. 연결 설정 
+- git remote add origin 주소
+- git add .
+- git commit -m "."
+- git push origin master
+5.GitHub에서 업데이트 확인

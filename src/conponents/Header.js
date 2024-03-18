@@ -1,36 +1,39 @@
 import styled from "styled-components"
 
 const Wrap = styled.div`
-line-height: 300px;
-text-align: center;
-display:flex;
+width: 100%;
+height: 300px;
+background-color: aliceblue;
+display: flex;
 justify-content: space-between;
-`
 
+`;
 const Box1 = styled.div`
+width: 300px;
+height: 300px;
 background-color: blue;
-width: 300px;
-height: 300px;
-`;
 
+
+`;
 const Box2 = styled.div`
+width: 300px;
+height: 300px;
 background-color: red;
-width: 300px;
-height: 300px;
-`;
 
+
+`;
 const Box3 = styled.div`
-background-color: green;
 width: 300px;
 height: 300px;
-`;
+background-color: green;
 
+
+`;
 
 export const Header = () => {
     return <Wrap>
-        <Box1>1</Box1>
-        <Box2>2</Box2>
-        <Box3>3</Box3>
+        <Box1 />
+        <Box2 />
+        <Box3 />
     </Wrap>
 }
-

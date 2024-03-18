@@ -1,12 +1,10 @@
-import { Header } from "./conponents/Header";
-import { Header2 } from "./conponents/Header2";
-import { PropsEx } from "./conponents/PropsEx";
+import { Main } from "./Creative/MusicPlayer/Main"
+import { Event } from "./conponents/Event"
 
 export const App = () => {
   return <div>{
-    //<Header />
-    //<Header2 />
-    <PropsEx />
+    //<Main />
+    <Event />
   }
-  </div>;
+  </div>
 }
