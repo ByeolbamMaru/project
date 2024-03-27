@@ -1,90 +1,91 @@
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef, useState } from "react";
-import { ScrollLink } from "react-scroll";
-import styled, { keyframes } from "styled-components";
+import { useState } from "react";
+import styled, { css, keyframes } from "styled-components";
 
 const Wrap = styled.div``;
 
+
 const Container = styled.div`
+width: 100%;
 display: flex;
 justify-content: space-between;
 `;
 
+
+
 const Logo = styled.div`
-  h1 {font-size: 50px;}
-  margin: 0px 25px;
-`;
 
-const Menu = styled.div`
-cursor: pointer;
-`;
+p {font-weight:bold; font-size:30px; margin:20px 20px;}
 
-
-const Slidedown = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0px);
-  }
+@media screen and (max-width:450px) {
+font-size : 15px
+}
 `;
 
 
-const Slidemenu = styled.div`
-  width: 100%;
-  background-color: brown;
-  display: ${(props) => (props.menuopen ? "block" : "none")};
-  animation: ${Slidedown} 0.5s ease-in-out;
-  position: absolute;
-  top: 120px;
+const Menu = styled.div``;
+
+
+const slideInMenu = keyframes`
+from {
+transform:translateX(-100%);
+}
+
+to {
+transform: translateX(0%);
+}
+`;
+
+const slideOutMenu = keyframes`
+from {
+transform: translateX(0%);
+}
+
+to {
+transform:translateX(-100%);
+}
 `;
 
 
+const Box = styled.div`
+width: 300px;
+background-color: aquamarine;
+position: fixed;
+top: 100px;
+left: 0px;
+bottom: 0px;
+
+animation-duration: 0.3s;
+animation-timing-function: ease;
+animation-fill-mode: forwards;
+
+${({isOpen}) => 
+isOpen? css`animation-name: ${slideInMenu};`
+: css`animation-name:${slideOutMenu};`
+}
+`;
 
 export const Slide = () => {
-  const [menuopen, setMenuopen] = useState(false);
-  const menuRef = useRef();
+  const [showMenu, setShowMenu] = useState(false)
 
-  const Open = () => {
-    setMenuopen(!menuopen);
-  };
-
-  const Closemenu = () => {
-    setMenuopen(false);
-  };
-
-  useEffect(() => {
-    const handleoutsideclick = (event) => {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
-        Closemenu();
-      }
-    };
-
-    document.addEventListener("mousedown", handleoutsideclick);
-    return () => {
-      document.removeEventListener("mousedown", handleoutsideclick);
-    };
-  }, []);
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+  }
 
   return (
     <Wrap>
       <Container>
-        <Logo>
-          <h1>JSM SLIDE</h1>
-        </Logo>
-        <Menu onClick={Open}>
-            <FontAwesomeIcon icon={faBars} style={{fontSize:"60px", margin:"40px 40px"}} />
+        <Menu>
+          <FontAwesomeIcon icon={faBars} style={{fontSize:"60px", margin:"20px 20px"}} onClick={toggleMenu}/>
         </Menu>
-        <Slidemenu menuopen={Open} ref={menuRef}>
-            <ScrollLink onclick={Open} spy={true} smooth={true} duration={500}>123</ScrollLink>
-            <ScrollLink>456</ScrollLink>
-            <ScrollLink>789</ScrollLink>
-            <ScrollLink>000</ScrollLink>
-        </Slidemenu>
+        <Logo>
+          <p>JSM STUDIO</p>
+        </Logo>
       </Container>
+      <Box isOpen = {showMenu}>
+        Menu
+      </Box>
     </Wrap>
   );
 };
